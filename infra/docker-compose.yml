@@ -1,0 +1,48 @@
+version: "3.7" # 파일 규격 버전
+
+# everse 개발용 : mysql, redis 
+
+services:
+  mysql:
+    container_name: everse-mysql
+    command: # 명령어 실행
+      - --default-authentication-plugin=mysql_native_password 
+      - --innodb-use-native-aio=0
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    image: mysql:5.7
+    ports:
+      - "13306:3306"
+    #restart: always
+    networks:
+      - everse-backend
+    volumes:
+      - everse-mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: "everse"
+      MYSQL_USER: "everse"
+      MYSQL_PASSWORD: "asdf1234!"
+      MYSQL_ROOT_PASSWORD: "asdf1234!"
+
+  redis:
+    container_name: everse-redis
+    image: redis:5.0.6-alpine 
+    ports:
+      - "16379:6379"
+    volumes:
+      - everse-redis:/data/redis
+    #restart: always
+    networks: # 서버와 같은 네트워크, 잊지 마세요!
+      - everse-backend
+
+networks:
+  everse-backend:
+    driver: bridge
+
+volumes: # 데이터 /var/lib/docker/volumes/ [xxx-mysql, xxx-redis]
+  everse-mysql:
+  everse-redis:
+
+# docker-compose build
+# docker-compose up -d
+# docker-compose stop
