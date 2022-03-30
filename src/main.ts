@@ -18,10 +18,24 @@ async function bootstrap() {
               ? winston.format.simple()
               : winston.format.combine(
                   winston.format.timestamp(),
+                  winston.format.ms(),
                   utilities.format.nestLike('hello-nestjs', {
                     prettyPrint: true,
                   }),
                 ),
+        }),
+        new (require('winston-daily-rotate-file'))({
+          format: winston.format.combine(
+            winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+            winston.format.printf(
+              (info) => `[${info.timestamp}] ${info.level}: ${info.message}`,
+            ),
+          ),
+          filename: 'logs/%DATE%.log',
+          datePattern: 'YYYY-MM-DD',
+          zippedArchive: true,
+          maxSize: '1m',
+          maxFiles: '7d',
         }),
       ],
     }),
