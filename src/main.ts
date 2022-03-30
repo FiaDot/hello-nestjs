@@ -4,6 +4,7 @@ import { setupSwagger } from 'src/util/swagger';
 import { utilities, WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 import { Logger } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const logger = new Logger();
@@ -40,6 +41,13 @@ async function bootstrap() {
       ],
     }),
   });
+
+  // 전역 validation 적용
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+    }),
+  );
 
   // Swagger 설정
   setupSwagger(app);
