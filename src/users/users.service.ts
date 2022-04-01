@@ -1,7 +1,4 @@
-import {
-  Injectable,
-  UnprocessableEntityException,
-} from '@nestjs/common';
+import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -25,19 +22,19 @@ export class UsersService {
     return this.userRepository.save(user);
   }
 
+  async isUserExists(platformUID: string): Promise<boolean> {
+    const user = await this.userRepository.findOne({ where: { platformUID } });
+    console.log('isUserExists');
+    console.log(user);
+    return !!user;
+  }
+
   findAll() {
     return `This action returns all users`;
   }
 
   findOne(id: number) {
     return `This action returns a #${id} user`;
-  }
-
-  async isUserExists(platformUID: string): Promise<boolean> {
-    const user = await this.userRepository.findOne({ where: { platformUID } });
-    console.log('isUserExists');
-    console.log(user);
-    return !!user;
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
