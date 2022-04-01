@@ -16,6 +16,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: 'everse',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
+      timezone: 'Asia/Seoul',
     }),
   ],
   controllers: [AppController],
