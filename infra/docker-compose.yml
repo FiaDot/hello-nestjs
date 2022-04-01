@@ -23,7 +23,7 @@ services:
       MYSQL_USER: "everse"
       MYSQL_PASSWORD: "asdf1234!"
       MYSQL_ROOT_PASSWORD: "asdf1234!"
-
+      TZ: "Asia/Seoul"
   redis:
     container_name: everse-redis
     image: redis:5.0.6-alpine 

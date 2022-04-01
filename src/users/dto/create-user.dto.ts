@@ -4,14 +4,14 @@ import { IsString, MinLength, MaxLength } from 'class-validator';
 export class CreateUserDto {
   @IsString()
   @MinLength(1)
-  @MaxLength(8)
+  @MaxLength(128)
   @ApiProperty({
-    description: '이름',
-    example: '김초롱', // default: "string" 해당 타입이 들어감
+    description: '플랫폼 제공 User ID',
+    example: 'em123', // default: "string" 해당 타입이 들어감
     required: true, // default: false
   })
-  name: string;
+  platformUID: string;
 
-  @ApiProperty({ description: '이메일' })
-  email: string;
+  // @ApiProperty({ description: '유저 고유번호' })
+  // uid: string;
 }

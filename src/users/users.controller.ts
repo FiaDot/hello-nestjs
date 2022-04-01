@@ -6,7 +6,10 @@ import {
   Patch,
   Param,
   Delete,
-  Inject, LoggerService
+  Inject,
+  LoggerService,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -14,6 +17,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from './entities/user.entity';
 import { Logger } from '@nestjs/common';
+import { ErrorResponseDto } from '../error/dto/error-response.dto';
 
 @Controller('users')
 @ApiTags('유저 API')
@@ -26,8 +30,17 @@ export class UsersController {
   @Post()
   @ApiOperation({ summary: '유저 생성 API', description: '유저를 생성' })
   // @ApiBody({ type: CreateUserDto })
-  @ApiResponse({ description: '유저를 생성한다.', type: User, status: 200 })
-  create(@Body() createUserDto: CreateUserDto) {
+  @ApiResponse({
+    description: '유저를 생성했음',
+    type: User,
+    status: HttpStatus.CREATED,
+  })
+  @ApiResponse({
+    description: '이미 존재하는 유저',
+    type: ErrorResponseDto,
+    status: HttpStatus.UNPROCESSABLE_ENTITY,
+  })
+  async create(@Body() createUserDto: CreateUserDto) {
     this.logger.log(createUserDto);
     return this.usersService.create(createUserDto);
   }
