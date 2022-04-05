@@ -4,11 +4,12 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Logger } from '@nestjs/common';
+import { DateTimeHelper } from '../common/helpers/datetime.helper';
 
-if (global.console.constructor.name === 'CustomConsole') {
-  // you can also override the global.console with another CustomConsole of yours, like https://stackoverflow.com/a/57443150
-  global.console = require('console');
-}
+// if (global.console.constructor.name === 'CustomConsole') {
+//   // you can also override the global.console with another CustomConsole of yours, like https://stackoverflow.com/a/57443150
+//   global.console = require('console');
+// }
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -56,5 +57,13 @@ describe('UsersService', () => {
     );
     console.log(`record login = ${recordedUser.loginAt}`);
     console.log(`record create= ${recordedUser.createdAt}`);
+  });
+
+  it('find between date', async () => {
+    const begin = DateTimeHelper.get_prev_day(2);
+    const end = DateTimeHelper.get_now_string();
+
+    const result = await service.findCreateAtBetweenDate(begin, end);
+    console.log(`result=${JSON.stringify(result)}`);
   });
 });

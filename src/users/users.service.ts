@@ -2,9 +2,13 @@ import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import {
+  Between,
+  Repository,
+} from 'typeorm';
 import { User } from './entities/user.entity';
 import * as moment from 'moment-timezone';
+import { DateTimeHelper } from '../common/helpers/datetime.helper';
 
 @Injectable()
 export class UsersService {
@@ -49,5 +53,20 @@ export class UsersService {
 
   remove(id: number) {
     return `This action removes a #${id} user`;
+  }
+
+  async findCreateAtBetweenDate(
+    beginDate: string,
+    endDate: string,
+  ): Promise<User[]> {
+    // TODO : string 으로 받아서 moment로 변환 후 range 설정!
+    const begin: Date = DateTimeHelper.get_str_to_date(beginDate);
+    const end: Date = DateTimeHelper.get_str_to_date(endDate);
+
+    return await this.userRepository.find({
+      where: {
+        createdAt: Between(begin, end),
+      },
+    });
   }
 }

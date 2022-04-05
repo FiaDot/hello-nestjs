@@ -7,6 +7,10 @@ import { Logger } from '@nestjs/common';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
+  process.env.TZ = 'Asia/Seoul'; // UTC +09:00
+  // console.log(process.env.TZ);
+  // console.log(new Date().toString());
+
   const logger = new Logger();
 
   const app = await NestFactory.create(AppModule, {

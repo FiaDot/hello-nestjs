@@ -18,6 +18,7 @@ import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from './entities/user.entity';
 import { Logger } from '@nestjs/common';
 import { ErrorResponseDto } from '../error/dto/error-response.dto';
+import { FindAllUserDto } from './dto/findall-user.dto';
 
 @Controller('users')
 @ApiTags('유저 API')
@@ -42,13 +43,24 @@ export class UsersController {
   })
   async create(@Body() createUserDto: CreateUserDto) {
     this.logger.log(createUserDto);
-    return this.usersService.create(createUserDto);
+    return await this.usersService.create(createUserDto);
   }
 
-  @Get()
-  findAll() {
-    return this.usersService.findAll();
+  @Post('/find')
+  @ApiOperation({ summary: '유저 조회 API', description: '유저를 조회' })
+  async findAll(@Body() findAllUserDto: FindAllUserDto) {
+    const result = await this.usersService.findCreateAtBetweenDate(
+      findAllUserDto.beginDate,
+      findAllUserDto.endDate,
+    );
+    this.logger.log(result);
+    return result;
   }
+
+  // @Get()
+  // findAll() {
+  //   return this.usersService.findAll();
+  // }
 
   @Get(':id')
   findOne(@Param('id') id: string) {

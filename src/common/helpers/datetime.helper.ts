@@ -1,6 +1,10 @@
 import * as moment from 'moment-timezone';
 
 export class DateTimeHelper {
+  static get_str_to_date = (str: string): Date => {
+    return moment(str).utcOffset(9).toDate();
+  };
+
   // 현재 로컬 시간 반환
   static get_now_local_date = (): Date => {
     return moment().utcOffset(9).toDate();
