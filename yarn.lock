@@ -609,6 +609,16 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@js-joda/core@^5.2.0", "@js-joda/core@>=1.11.0":
+  "integrity" "sha512-0OriPYIaMLB3XiLQMe0BXKVIqeriTn3H7JMOzTsHEtt7Zqq+TetCu97KnAhU3ckiQZKBxfZshft+H1OC4D1lXw=="
+  "resolved" "https://registry.npmjs.org/@js-joda/core/-/core-5.2.0.tgz"
+  "version" "5.2.0"
+
+"@js-joda/timezone@^2.12.0":
+  "integrity" "sha512-1bpkGU3bh80wqR1TCpMXpgpwVs7RpIkYmq75JIGl+NRFIKEhE3qHYBtS4EFSAkVxCTZSj6b9dolr8ijq36GJEQ=="
+  "resolved" "https://registry.npmjs.org/@js-joda/timezone/-/timezone-2.12.0.tgz"
+  "version" "2.12.0"
+
 "@nestjs/cli@^8.0.0":
   "integrity" "sha512-9zNV9oMtaz1vwLO3WXviD0wzRpyiaLWJZ7KCIZLk62U22RDNRsbtLLDS52Wkig5L8UU7Z1xRfrEv+s3f9keysQ=="
   "resolved" "https://registry.npmjs.org/@nestjs/cli/-/cli-8.2.4.tgz"
@@ -3557,11 +3567,6 @@
     "@jest/core" "^27.5.1"
     "import-local" "^3.0.2"
     "jest-cli" "^27.5.1"
-
-"js-joda@^1.11.0":
-  "integrity" "sha512-/HJpRhwP2fPyuSsCaZuoVJuaSIt8tUXykV4wOMRXrFk7RP9h9VWaFdS9YHKdMepxb/3TdXpL6IhfC9L0sqYVBw=="
-  "resolved" "https://registry.npmjs.org/js-joda/-/js-joda-1.11.0.tgz"
-  "version" "1.11.0"
 
 "js-tokens@^4.0.0":
   "integrity" "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="
