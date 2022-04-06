@@ -41,8 +41,8 @@ export class User {
   @Column({
     type: 'datetime',
     transformer: new LocalDateTimeTransformer(),
-    // default null이고 nullable 이면 에러 발생
-    default: null,
+    // default null이고 nullable 이면 transformer 버그 발생
+    // default: null,
     nullable: true,
   })
   loginAt: LocalDateTime;
