@@ -6,10 +6,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Logger } from '@nestjs/common';
 import { DateTimeHelper } from '../common/helpers/datetime.helper';
 
-// if (global.console.constructor.name === 'CustomConsole') {
-//   // you can also override the global.console with another CustomConsole of yours, like https://stackoverflow.com/a/57443150
-//   global.console = require('console');
-// }
+if (global.console.constructor.name === 'CustomConsole') {
+  // you can also override the global.console with another CustomConsole of yours, like https://stackoverflow.com/a/57443150
+  global.console = require('console');
+}
+
+import {
+  convert,
+  LocalDate,
+  LocalDateTime,
+} from 'js-joda';
+
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -65,5 +72,22 @@ describe('UsersService', () => {
 
     const result = await service.findCreateAtBetweenDate(begin, end);
     console.log(`result=${JSON.stringify(result)}`);
+  });
+
+  it('js-joda', () => {
+    const now = LocalDateTime.now();
+    const after = now.plusDays(1);
+    const before = now.minusDays(1);
+
+    // console.log(now); // object
+    console.log(`now=${now}, after=${after}, before=${before}`);
+
+    const toDate = convert(now).toDate();
+    console.log('toDate=');
+    console.log(toDate);
+
+    expect(now.isBefore(after)).toBeTruthy();
+    expect(now.isEqual(after)).toBeFalsy();
+    expect(now.isAfter(before)).toBeTruthy();
   });
 });
