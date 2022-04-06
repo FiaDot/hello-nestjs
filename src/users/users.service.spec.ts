@@ -6,10 +6,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Logger } from '@nestjs/common';
 import { DateTimeHelper } from '../common/helpers/datetime.helper';
 
-// if (global.console.constructor.name === 'CustomConsole') {
-//   // you can also override the global.console with another CustomConsole of yours, like https://stackoverflow.com/a/57443150
-//   global.console = require('console');
-// }
+// 로그 상세 정보 끄기
+if (global.console.constructor.name === 'CustomConsole') {
+  // you can also override the global.console with another CustomConsole of yours, like https://stackoverflow.com/a/57443150
+  global.console = require('console');
+}
 
 describe('UsersService', () => {
   let service: UsersService;

@@ -1,11 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { LocalDateTimeTransformer } from '../../common/helpers/LocalDateTimeTransformer';
+import { LocalDateTime } from '@js-joda/core';
 
 @Entity('User')
 export class User {
@@ -34,14 +38,41 @@ export class User {
   block: boolean;
 
   @ApiProperty({ description: '최종 로그인 시간' })
-  @Column({ default: null, nullable: true })
-  loginAt: Date;
+  @Column({
+    type: 'datetime',
+    transformer: new LocalDateTimeTransformer(),
+    // default null이고 nullable 이면 transformer 버그 발생
+    // default: null,
+    nullable: true,
+  })
+  loginAt: LocalDateTime;
 
   @ApiProperty({ description: '생성일시' })
-  @CreateDateColumn()
-  createdAt: Date;
+  // @CreateDateColumn()
+  @Column({
+    type: 'datetime',
+    transformer: new LocalDateTimeTransformer(),
+    nullable: false,
+  })
+  createdAt: LocalDateTime;
 
   @ApiProperty({ description: '수정일시' })
-  @UpdateDateColumn()
-  updatedAt: Date;
+  // @UpdateDateColumn()
+  @Column({
+    type: 'datetime',
+    transformer: new LocalDateTimeTransformer(),
+    nullable: false,
+  })
+  updatedAt: LocalDateTime;
+
+  @BeforeInsert()
+  protected beforeInsert() {
+    this.createdAt = LocalDateTime.now();
+    this.updatedAt = LocalDateTime.now();
+  }
+
+  @BeforeUpdate()
+  protected beforeUpdate() {
+    this.updatedAt = LocalDateTime.now();
+  }
 }
