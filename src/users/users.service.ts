@@ -22,7 +22,8 @@ export class UsersService {
 
     const user = new User();
     user.platformUID = createUserDto.platformUID;
-    user.loginAt = LocalDateTime.now(); // moment().utcOffset(9).toDate();
+    //user.loginAt = undefined;
+    // user.loginAt = LocalDateTime.now(); // moment().utcOffset(9).toDate();
 
     return this.userRepository.save(user);
   }
