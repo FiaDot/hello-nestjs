@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -46,10 +48,31 @@ export class User {
   loginAt: LocalDateTime;
 
   @ApiProperty({ description: '생성일시' })
-  @CreateDateColumn()
-  createdAt: Date;
+  // @CreateDateColumn()
+  @Column({
+    type: 'datetime',
+    transformer: new LocalDateTimeTransformer(),
+    nullable: false,
+  })
+  createdAt: LocalDateTime;
 
   @ApiProperty({ description: '수정일시' })
-  @UpdateDateColumn()
-  updatedAt: Date;
+  // @UpdateDateColumn()
+  @Column({
+    type: 'datetime',
+    transformer: new LocalDateTimeTransformer(),
+    nullable: false,
+  })
+  updatedAt: LocalDateTime;
+
+  @BeforeInsert()
+  protected beforeInsert() {
+    this.createdAt = LocalDateTime.now();
+    this.updatedAt = LocalDateTime.now();
+  }
+
+  @BeforeUpdate()
+  protected beforeUpdate() {
+    this.updatedAt = LocalDateTime.now();
+  }
 }
