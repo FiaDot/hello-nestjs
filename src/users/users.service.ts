@@ -2,13 +2,11 @@ import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import {
-  Between,
-  Repository,
-} from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import * as moment from 'moment-timezone';
 import { DateTimeHelper } from '../common/helpers/datetime.helper';
+import { LocalDateTime } from '@js-joda/core';
 
 @Injectable()
 export class UsersService {
@@ -24,7 +22,7 @@ export class UsersService {
 
     const user = new User();
     user.platformUID = createUserDto.platformUID;
-    user.loginAt = moment().utcOffset(9).toDate();
+    user.loginAt = LocalDateTime.now(); // moment().utcOffset(9).toDate();
 
     return this.userRepository.save(user);
   }

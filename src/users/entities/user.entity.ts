@@ -6,6 +6,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { LocalDateTimeTransformer } from '../../common/helpers/LocalDateTimeTransformer';
+import { LocalDateTime } from '@js-joda/core';
 
 @Entity('User')
 export class User {
@@ -34,8 +36,13 @@ export class User {
   block: boolean;
 
   @ApiProperty({ description: '최종 로그인 시간' })
-  @Column({ default: null, nullable: true })
-  loginAt: Date;
+  @Column({
+    type: 'datetime',
+    transformer: new LocalDateTimeTransformer(),
+    default: null,
+    nullable: true,
+  })
+  loginAt: LocalDateTime;
 
   @ApiProperty({ description: '생성일시' })
   @CreateDateColumn()
