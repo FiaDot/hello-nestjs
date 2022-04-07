@@ -62,6 +62,10 @@ describe('UsersService', () => {
           //useFactory: mockUserModel,
           useValue: {
             findByPk: jest.fn((id) => testUser),
+            findAll: jest.fn(() => [testUser]),
+            findOne: jest.fn(),
+            create: jest.fn(() => testUser),
+            remove: jest.fn(),
           },
         },
       ],
