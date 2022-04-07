@@ -2,13 +2,15 @@ import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import * as moment from 'moment-timezone';
-import { DateTimeHelper } from '../common/helpers/datetime.helper';
+import { InjectModel } from '@nestjs/sequelize';
+import moment from 'moment';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class UsersService {
   constructor(
-
+    @InjectModel(User)
+    private userRepository: typeof User,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -19,7 +21,7 @@ export class UsersService {
 
     const user = new User();
     user.platformUID = createUserDto.platformUID;
-    //user.loginAt = undefined;
+    user.loginAt = new Date();
     // user.loginAt = LocalDateTime.now(); // moment().utcOffset(9).toDate();
 
     //return this.userRepository.save(user);
@@ -35,13 +37,12 @@ export class UsersService {
     return `This action returns all users`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    return await this.userRepository.findByPk(id);
   }
 
   async findOneByPlatformUID(platformUID: string) {
-    //const user = await this.userRepository.findOne({ where: { platformUID } });
-    //return user;
+    const user = await this.userRepository.findOne({ where: { platformUID } });
     return null;
   }
 
@@ -56,16 +57,19 @@ export class UsersService {
   async findCreateAtBetweenDate(
     beginDate: string,
     endDate: string,
-  )
-  //): Promise<User[]> {
-    // TODO : string 으로 받아서 moment로 변환 후 range 설정!
-    // const begin: Date = DateTimeHelper.get_str_to_date(beginDate);
-    // const end: Date = DateTimeHelper.get_str_to_date(endDate);
+  ): Promise<User[]> {
+    // string 으로 받아서 moment로 변환 후 range 설정!
+    const beginCond = beginDate
+      ? { date: { [Op.gte]: moment(beginDate).toDate() } }
+      : {};
+    const endCond = endDate
+      ? { date: { [Op.lte]: moment(endDate).toDate() } }
+      : {};
 
-    // return await this.userRepository.find({
-    //   where: {
-    //     createdAt: Between(begin, end),
-    //   },
-    // });
+    const where = {
+      [Op.and]: [beginCond, endCond],
+    };
+
+    return await this.userRepository.findAll({ where });
   }
 }
