@@ -26,6 +26,9 @@ import { User } from './users/entities/user.entity';
         // dateStrings: true,
         // typeCast: true,
       },
+      logging: true,
+      synchronize: true,
+      // autoLoadModels: true, // models 정의 할 필요없이 전체 엔티티 검색해서 등록
       models: [User],
     }),
     UsersModule,
