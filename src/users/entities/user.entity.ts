@@ -1,32 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  BeforeInsert,
-  BeforeUpdate,
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
-import { LocalDateTimeTransformer } from '../../common/helpers/LocalDateTimeTransformer';
-import { LocalDateTime } from '@js-joda/core';
 
-@Entity('User')
 export class User {
   @ApiProperty({ description: '플랫폼 제공 User ID' })
-  @Column({ length: 128 })
   platformUID: string;
 
   @ApiProperty({ description: '유저 고유번호' })
-  @PrimaryGeneratedColumn('uuid')
   uid: string;
 
   @ApiProperty({ description: '레벨' })
-  @Column({ default: 1 })
   lv: number;
 
   @ApiProperty({ description: '경험치' })
-  @Column({ default: 0 })
   exp: number;
 
   @ApiProperty({ description: '골드' })

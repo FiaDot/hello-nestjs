@@ -1,17 +1,14 @@
 import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Between, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import * as moment from 'moment-timezone';
 import { DateTimeHelper } from '../common/helpers/datetime.helper';
-import { LocalDateTime } from '@js-joda/core';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User) private userRepository: Repository<User>,
+
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -25,7 +22,8 @@ export class UsersService {
     //user.loginAt = undefined;
     // user.loginAt = LocalDateTime.now(); // moment().utcOffset(9).toDate();
 
-    return this.userRepository.save(user);
+    //return this.userRepository.save(user);
+    return user;
   }
 
   async isUserExists(platformUID: string): Promise<boolean> {
@@ -42,8 +40,9 @@ export class UsersService {
   }
 
   async findOneByPlatformUID(platformUID: string) {
-    const user = await this.userRepository.findOne({ where: { platformUID } });
-    return user;
+    //const user = await this.userRepository.findOne({ where: { platformUID } });
+    //return user;
+    return null;
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
@@ -57,15 +56,16 @@ export class UsersService {
   async findCreateAtBetweenDate(
     beginDate: string,
     endDate: string,
-  ): Promise<User[]> {
+  )
+  //): Promise<User[]> {
     // TODO : string 으로 받아서 moment로 변환 후 range 설정!
-    const begin: Date = DateTimeHelper.get_str_to_date(beginDate);
-    const end: Date = DateTimeHelper.get_str_to_date(endDate);
+    // const begin: Date = DateTimeHelper.get_str_to_date(beginDate);
+    // const end: Date = DateTimeHelper.get_str_to_date(endDate);
 
-    return await this.userRepository.find({
-      where: {
-        createdAt: Between(begin, end),
-      },
-    });
+    // return await this.userRepository.find({
+    //   where: {
+    //     createdAt: Between(begin, end),
+    //   },
+    // });
   }
 }
