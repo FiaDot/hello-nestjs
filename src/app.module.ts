@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { User } from './users/entities/user.entity';
 
 @Module({
   imports: [
@@ -25,7 +26,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
         // dateStrings: true,
         // typeCast: true,
       },
-      models: [],
+      models: [User],
     }),
     UsersModule,
   ],
