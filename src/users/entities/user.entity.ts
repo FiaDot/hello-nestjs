@@ -10,8 +10,8 @@ import {
 } from 'sequelize-typescript';
 
 @Table({
-  timestamps: true, // createAt, updatedAt 컬럼 추가
-  paranoid: true, // deleteAt 컬럼 추가 : 실제 레코드 삭제 안함 (soft delete)
+  // timestamps: true, // createAt, updatedAt 컬럼 추가
+  // paranoid: true, // deleteAt 컬럼 추가 : 실제 레코드 삭제 안함 (soft delete)
   // charset: 'utf8mb4', // TODO : 따로 설정할 필요 있는지 체크 필요
   // collate: 'utf8mb4_general_ci', // TODO : 따로 설정할 필요 있는지 체크 필요
 })
