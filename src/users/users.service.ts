@@ -22,10 +22,13 @@ export class UsersService {
     const user = new User();
     user.platformUID = createUserDto.platformUID;
     user.loginAt = new Date();
-    // user.loginAt = LocalDateTime.now(); // moment().utcOffset(9).toDate();
+    await user.save(); // 바로 반환하면 UTC로 전달함
 
-    //return this.userRepository.save(user);
-    return user;
+    const userDao = user.get({ plain: true, clone: true });
+    userDao.loginAt = undefined;
+    userDao.updatedAt = undefined;
+    userDao.createdAt = undefined;
+    return userDao;
   }
 
   async isUserExists(platformUID: string): Promise<boolean> {
@@ -42,8 +45,7 @@ export class UsersService {
   }
 
   async findOneByPlatformUID(platformUID: string) {
-    const user = await this.userRepository.findOne({ where: { platformUID } });
-    return null;
+    return await this.userRepository.findOne({ where: { platformUID } });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
