@@ -4,6 +4,7 @@ import { IsString, MinLength, MaxLength } from 'class-validator';
 export class FindAllUserDto {
   @IsString()
   @MinLength(1)
+  @MaxLength(20)
   @ApiProperty({
     description: '시작 날짜',
     example: '2022-04-05 10:54:01',
@@ -13,6 +14,7 @@ export class FindAllUserDto {
 
   @IsString()
   @MinLength(1)
+  @MaxLength(20)
   @ApiProperty({
     description: '종료 날짜',
     example: '2022-04-06 10:54:01',
