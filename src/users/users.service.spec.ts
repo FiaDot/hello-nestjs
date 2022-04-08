@@ -2,9 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Logger } from '@nestjs/common';
 import { DateTimeHelper } from '../common/helpers/datetime.helper';
+import { getModelToken} from '@nestjs/sequelize';
 
 // 로그 상세 정보 끄기
 if (global.console.constructor.name === 'CustomConsole') {
@@ -12,52 +11,60 @@ if (global.console.constructor.name === 'CustomConsole') {
   global.console = require('console');
 }
 
+const testUser = {
+  id: 1,
+  platformUID: 'test',
+  lv: 1,
+  exp: 0,
+  gold: 0,
+  isBlock: false,
+};
+
 describe('UsersService', () => {
   let service: UsersService;
+  let model: typeof User;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [
-        TypeOrmModule.forRoot({
-          type: 'mysql',
-          host: 'localhost',
-          port: 13306,
-          username: 'everse',
-          password: 'asdf1234!',
-          database: 'everse',
-          entities: [__dirname + '/**/*.entity{.ts,.js}'],
-          synchronize: true,
-          //timezone: 'Asia/Seoul',
-          //timezone: 'Z',
-          timezone: 'local',
-        }),
-        TypeOrmModule.forFeature([User]),
+      // 실제 DB에 접속해서 하는 방법
+      // imports: [SequelizeModule.forFeature([User])],
+      providers: [
+        UsersService,
+        {
+          provide: getModelToken(User),
+          //useFactory: mockUserModel,
+          useValue: {
+            findByPk: jest.fn(() => testUser),
+            findAll: jest.fn(() => [testUser]),
+            findOne: jest.fn(),
+            create: jest.fn(() => testUser),
+            // remove: jest.fn(),
+            // save: jest.fn(() => testUser),
+            get: jest.fn(() => testUser),
+          },
+        },
       ],
-      providers: [UsersService],
     }).compile();
 
     service = module.get<UsersService>(UsersService);
+    model = module.get<typeof User>(getModelToken(User));
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
 
-  it('date checker', async () => {
+  it('findOne', async () => {
+    const user: User = await service.findOne(1);
+    expect(user.id).toBeDefined();
+  });
+
+  it('createUser ', async () => {
     const createUserDto = new CreateUserDto();
-    createUserDto.platformUID = 'test14';
+    createUserDto.platformUID = 'test15';
 
     const user: User = await service.create(createUserDto);
-    expect(user.uid).toBeDefined();
-
-    console.log(`create login = ${user.loginAt}`);
-    console.log(`create create= ${user.createdAt}`);
-
-    const recordedUser = await service.findOneByPlatformUID(
-      createUserDto.platformUID,
-    );
-    console.log(`record login = ${recordedUser.loginAt}`);
-    console.log(`record create= ${recordedUser.createdAt}`);
+    expect(user.id).toBeDefined();
   });
 
   it('find between date', async () => {
@@ -65,6 +72,6 @@ describe('UsersService', () => {
     const end = DateTimeHelper.get_now_string();
 
     const result = await service.findCreateAtBetweenDate(begin, end);
-    console.log(`result=${JSON.stringify(result)}`);
+    expect(result).toBeDefined();
   });
 });

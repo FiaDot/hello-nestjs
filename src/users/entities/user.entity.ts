@@ -1,78 +1,62 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
-  BeforeInsert,
-  BeforeUpdate,
+  AllowNull,
+  AutoIncrement,
   Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
-import { LocalDateTimeTransformer } from '../../common/helpers/LocalDateTimeTransformer';
-import { LocalDateTime } from '@js-joda/core';
+  Default,
+  Model,
+  PrimaryKey,
+  Table,
+} from 'sequelize-typescript';
 
-@Entity('User')
-export class User {
+@Table({
+  timestamps: true, // createAt, updatedAt 컬럼 추가
+  paranoid: true, // deleteAt 컬럼 추가 : 실제 레코드 삭제 안함 (soft delete)
+  // charset: 'utf8mb4', // TODO : 따로 설정할 필요 있는지 체크 필요
+  // collate: 'utf8mb4_general_ci', // TODO : 따로 설정할 필요 있는지 체크 필요
+})
+export class User extends Model<User> {
   @ApiProperty({ description: '플랫폼 제공 User ID' })
-  @Column({ length: 128 })
+  @Column
   platformUID: string;
 
   @ApiProperty({ description: '유저 고유번호' })
-  @PrimaryGeneratedColumn('uuid')
-  uid: string;
+  @PrimaryKey
+  @AutoIncrement
+  // @Column(DataType.INTEGER.UNSIGNED)
+  @Column
+  id: number;
 
   @ApiProperty({ description: '레벨' })
-  @Column({ default: 1 })
+  @Default(1)
+  @Column
   lv: number;
 
   @ApiProperty({ description: '경험치' })
-  @Column({ default: 0 })
+  @Default(0)
+  @Column
   exp: number;
 
   @ApiProperty({ description: '골드' })
-  @Column({ default: 0 })
+  @Default(0)
+  @Column
   gold: number;
 
   @ApiProperty({ description: '차단여부' })
-  @Column({ default: false })
-  block: boolean;
+  @Default(false)
+  @Column
+  isBlock: boolean;
 
   @ApiProperty({ description: '최종 로그인 시간' })
-  @Column({
-    type: 'datetime',
-    transformer: new LocalDateTimeTransformer(),
-    // default null이고 nullable 이면 transformer 버그 발생
-    // default: null,
-    nullable: true,
-  })
-  loginAt: LocalDateTime;
+  @AllowNull(true)
+  @Column
+  loginAt: Date;
 
-  @ApiProperty({ description: '생성일시' })
-  // @CreateDateColumn()
-  @Column({
-    type: 'datetime',
-    transformer: new LocalDateTimeTransformer(),
-    nullable: false,
-  })
-  createdAt: LocalDateTime;
-
-  @ApiProperty({ description: '수정일시' })
-  // @UpdateDateColumn()
-  @Column({
-    type: 'datetime',
-    transformer: new LocalDateTimeTransformer(),
-    nullable: false,
-  })
-  updatedAt: LocalDateTime;
-
-  @BeforeInsert()
-  protected beforeInsert() {
-    this.createdAt = LocalDateTime.now();
-    this.updatedAt = LocalDateTime.now();
-  }
-
-  @BeforeUpdate()
-  protected beforeUpdate() {
-    this.updatedAt = LocalDateTime.now();
-  }
+  // @ApiProperty({ description: '생성일시' })
+  // @CreatedAt
+  // createdAt: Date;
+  //
+  // @ApiProperty({ description: '수정일시' })
+  // @UpdatedAt
+  // updatedAt: Date;
 }

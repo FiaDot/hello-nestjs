@@ -8,13 +8,12 @@ import {
   Delete,
   Inject,
   LoggerService,
-  HttpException,
   HttpStatus,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from './entities/user.entity';
 import { Logger } from '@nestjs/common';
 import { ErrorResponseDto } from '../error/dto/error-response.dto';

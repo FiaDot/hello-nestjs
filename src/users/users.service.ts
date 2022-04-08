@@ -1,17 +1,16 @@
 import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Between, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
-import * as moment from 'moment-timezone';
+import { InjectModel } from '@nestjs/sequelize';
+import { Op } from 'sequelize';
 import { DateTimeHelper } from '../common/helpers/datetime.helper';
-import { LocalDateTime } from '@js-joda/core';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User) private userRepository: Repository<User>,
+    @InjectModel(User)
+    private userRepository: typeof User,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -20,12 +19,10 @@ export class UsersService {
       throw new UnprocessableEntityException('이미 가입된 사용자 입니다.');
     }
 
-    const user = new User();
-    user.platformUID = createUserDto.platformUID;
-    //user.loginAt = undefined;
-    // user.loginAt = LocalDateTime.now(); // moment().utcOffset(9).toDate();
-
-    return this.userRepository.save(user);
+    return await this.userRepository.create({
+      ...createUserDto,
+      loginAt: new Date(),
+    });
   }
 
   async isUserExists(platformUID: string): Promise<boolean> {
@@ -37,13 +34,12 @@ export class UsersService {
     return `This action returns all users`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    return await this.userRepository.findByPk(id);
   }
 
   async findOneByPlatformUID(platformUID: string) {
-    const user = await this.userRepository.findOne({ where: { platformUID } });
-    return user;
+    return await this.userRepository.findOne({ where: { platformUID } });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
@@ -58,14 +54,20 @@ export class UsersService {
     beginDate: string,
     endDate: string,
   ): Promise<User[]> {
-    // TODO : string 으로 받아서 moment로 변환 후 range 설정!
-    const begin: Date = DateTimeHelper.get_str_to_date(beginDate);
-    const end: Date = DateTimeHelper.get_str_to_date(endDate);
+    const beginCond = beginDate
+      ? {
+          createdAt: { [Op.gte]: DateTimeHelper.get_date_by_string(beginDate) },
+        }
+      : {};
 
-    return await this.userRepository.find({
-      where: {
-        createdAt: Between(begin, end),
-      },
-    });
+    const endCond = endDate
+      ? { createdAt: { [Op.lte]: DateTimeHelper.get_date_by_string(endDate) } }
+      : {};
+
+    const where = {
+      [Op.and]: [beginCond, endCond],
+    };
+
+    return await this.userRepository.findAll({ where });
   }
 }

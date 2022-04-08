@@ -29,6 +29,7 @@ async function bootstrap() {
                   }),
                 ),
         }),
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         new (require('winston-daily-rotate-file'))({
           format: winston.format.combine(
             winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
