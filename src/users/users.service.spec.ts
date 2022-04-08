@@ -3,8 +3,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { DateTimeHelper } from '../common/helpers/datetime.helper';
-import { AppModule } from '../app.module';
-import { getModelToken, SequelizeModule } from '@nestjs/sequelize';
+import { getModelToken} from '@nestjs/sequelize';
 
 // 로그 상세 정보 끄기
 if (global.console.constructor.name === 'CustomConsole') {
@@ -12,39 +11,14 @@ if (global.console.constructor.name === 'CustomConsole') {
   global.console = require('console');
 }
 
-// const mockUsersService = {
-//   async create(createUserDto: CreateUserDto) {
-//     const user = new User();
-//     user.id = 1;
-//     user.platformUID = createUserDto.platformUID;
-//     user.lv = 1;
-//     user.exp = 0;
-//     user.loginAt = undefined;
-//     user.createdAt = undefined;
-//     user.updatedAt = undefined;
-//     return user;
-//   },
-// };
-
-// const mockModel = {
-//   findByPk: jest.fn((id) => {
-//     const testUser = new User();
-//     testUser.id = id;
-//     testUser.platformUID = 'test';
-//     return testUser;
-//   }),
-// };
-
-const mockUserModel = () => ({
-  findByPk: jest.fn((id) => {
-    const testUser = new User();
-    testUser.id = id;
-    testUser.platformUID = 'test';
-    return testUser;
-  }),
-});
-
-const testUser = { id: 1, platformUID: 'test' };
+const testUser = {
+  id: 1,
+  platformUID: 'test',
+  lv: 1,
+  exp: 0,
+  gold: 0,
+  isBlock: false,
+};
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -58,14 +32,15 @@ describe('UsersService', () => {
         UsersService,
         {
           provide: getModelToken(User),
-          //useValue: mockModel,
           //useFactory: mockUserModel,
           useValue: {
-            findByPk: jest.fn((id) => testUser),
+            findByPk: jest.fn(() => testUser),
             findAll: jest.fn(() => [testUser]),
             findOne: jest.fn(),
             create: jest.fn(() => testUser),
-            remove: jest.fn(),
+            // remove: jest.fn(),
+            // save: jest.fn(() => testUser),
+            get: jest.fn(() => testUser),
           },
         },
       ],
@@ -81,7 +56,6 @@ describe('UsersService', () => {
 
   it('findOne', async () => {
     const user: User = await service.findOne(1);
-    console.log(`user=${JSON.stringify(user)}`);
     expect(user.id).toBeDefined();
   });
 
@@ -90,24 +64,14 @@ describe('UsersService', () => {
     createUserDto.platformUID = 'test15';
 
     const user: User = await service.create(createUserDto);
-    console.log(`user=${JSON.stringify(user)}`);
     expect(user.id).toBeDefined();
-
-    // console.log(`create login = ${user.loginAt}`);
-    // console.log(`create create= ${user.createdAt}`);
-
-    // const recordedUser = await service.findOneByPlatformUID(
-    //   createUserDto.platformUID,
-    // );
-    // console.log(`record login = ${recordedUser.loginAt}`);
-    // console.log(`record create= ${recordedUser.createdAt}`);
   });
 
-  // it('find between date', async () => {
-  //   const begin = DateTimeHelper.get_prev_day(2);
-  //   const end = DateTimeHelper.get_now_string();
-  //
-  //   const result = await service.findCreateAtBetweenDate(begin, end);
-  //   console.log(`result=${JSON.stringify(result)}`);
-  // });
+  it('find between date', async () => {
+    const begin = DateTimeHelper.get_prev_day(2);
+    const end = DateTimeHelper.get_now_string();
+
+    const result = await service.findCreateAtBetweenDate(begin, end);
+    expect(result).toBeDefined();
+  });
 });

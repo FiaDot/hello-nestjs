@@ -3,8 +3,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { InjectModel } from '@nestjs/sequelize';
-import moment from 'moment';
 import { Op } from 'sequelize';
+import { DateTimeHelper } from '../common/helpers/datetime.helper';
 
 @Injectable()
 export class UsersService {
@@ -19,16 +19,10 @@ export class UsersService {
       throw new UnprocessableEntityException('이미 가입된 사용자 입니다.');
     }
 
-    const user = new User();
-    user.platformUID = createUserDto.platformUID;
-    user.loginAt = new Date();
-    await user.save(); // 바로 반환하면 UTC로 전달함
-
-    const userDao = user.get({ plain: true, clone: true });
-    userDao.loginAt = undefined;
-    userDao.updatedAt = undefined;
-    userDao.createdAt = undefined;
-    return userDao;
+    return await this.userRepository.create({
+      ...createUserDto,
+      loginAt: new Date(),
+    });
   }
 
   async isUserExists(platformUID: string): Promise<boolean> {
@@ -60,12 +54,14 @@ export class UsersService {
     beginDate: string,
     endDate: string,
   ): Promise<User[]> {
-    // string 으로 받아서 moment로 변환 후 range 설정!
     const beginCond = beginDate
-      ? { date: { [Op.gte]: moment(beginDate).toDate() } }
+      ? {
+          createdAt: { [Op.gte]: DateTimeHelper.get_date_by_string(beginDate) },
+        }
       : {};
+
     const endCond = endDate
-      ? { date: { [Op.lte]: moment(endDate).toDate() } }
+      ? { createdAt: { [Op.lte]: DateTimeHelper.get_date_by_string(endDate) } }
       : {};
 
     const where = {
