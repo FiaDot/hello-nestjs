@@ -9,6 +9,7 @@ import {
   Inject,
   LoggerService,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -18,6 +19,7 @@ import { User } from './entities/user.entity';
 import { Logger } from '@nestjs/common';
 import { ErrorResponseDto } from '../error/dto/error-response.dto';
 import { FindAllUserDto } from './dto/findall-user.dto';
+import { LocalAuthGuard } from '../auth/local-auth.guard';
 
 @Controller('users')
 @ApiTags('유저 API')
@@ -45,6 +47,7 @@ export class UsersController {
     return await this.usersService.create(createUserDto);
   }
 
+  @UseGuards(LocalAuthGuard)
   @Post('/find')
   @ApiOperation({ summary: '유저 조회 API', description: '유저를 조회' })
   async findAll(@Body() findAllUserDto: FindAllUserDto) {

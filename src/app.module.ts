@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -17,6 +18,8 @@ import * as Joi from 'joi';
         DB_USERNAME: Joi.string().required(),
         DB_PASSWORD: Joi.string().required(),
         DB_DATABASE: Joi.string().required(),
+        JWT_SECRET: Joi.string().required(),
+        JWT_EXPIRATION_TIME: Joi.number().required(),
       }),
     }),
     SequelizeModule.forRootAsync({
@@ -48,6 +51,7 @@ import * as Joi from 'joi';
       }),
     }),
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

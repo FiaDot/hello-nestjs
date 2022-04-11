@@ -38,7 +38,7 @@ export class UsersService {
     return await this.userRepository.findByPk(id);
   }
 
-  async findOneByPlatformUID(platformUID: string) {
+  async findOneByPlatformUID(platformUID: string): Promise<User> {
     return await this.userRepository.findOne({ where: { platformUID } });
   }
 
