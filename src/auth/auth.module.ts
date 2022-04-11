@@ -3,13 +3,9 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import {
-  ConfigModule,
-  ConfigService,
-} from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UsersModule } from '../users/users.module';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { User } from '../users/entities/user.entity';
+import { LocalStrategy } from './local.strategy';
 
 @Module({
   imports: [
@@ -27,7 +23,7 @@ import { User } from '../users/entities/user.entity';
       }),
     }),
   ],
-  providers: [AuthService],
+  providers: [AuthService, LocalStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}

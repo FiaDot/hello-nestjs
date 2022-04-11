@@ -19,7 +19,7 @@ import { User } from './entities/user.entity';
 import { Logger } from '@nestjs/common';
 import { ErrorResponseDto } from '../error/dto/error-response.dto';
 import { FindAllUserDto } from './dto/findall-user.dto';
-import { LocalAuthGuard } from '../auth/LocalAuthGuard';
+import { LocalAuthGuard } from '../auth/local-auth.guard';
 
 @Controller('users')
 @ApiTags('유저 API')
