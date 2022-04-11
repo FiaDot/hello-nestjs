@@ -8,8 +8,8 @@ import {
 import { AuthService } from './auth.service';
 import { ApiOperation } from '@nestjs/swagger';
 import { LocalAuthGuard } from './local-auth.guard';
-import { VerifyDto } from './dto/verify.dto';
 import { LoginDto } from './dto/login.dto';
+import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -28,10 +28,12 @@ export class AuthController {
   //   return await this.authService.login(loginDto);
   // }
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Post('/verify')
   @ApiOperation({ summary: '인증 검증 API', description: '토큰 검증' })
-  verify(@Body() verifyDto: VerifyDto) {
-    return 'test';
+  verify(@Req() req, @Body() loginDto: LoginDto) {
+    console.log(req.user);
+    console.log(loginDto);
+    return req.user;
   }
 }
