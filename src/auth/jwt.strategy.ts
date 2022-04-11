@@ -10,7 +10,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       // header에 Bearer Token 값으로 포함해서 호출해야 서버에서 토큰을 받아 검사 할 수 있음
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       // jwtFromRequest: ExtractJwt.fromHeader('token'),
-      ignoreExpiration: true, // false로 하면 token 만료 검증을 서버에서 따로 진행
+      ignoreExpiration: false, // true 하면 token 만료 검증을 서버에서 따로 진행
       secretOrKey: configService.get('JWT_SECRET'),
     });
   }
