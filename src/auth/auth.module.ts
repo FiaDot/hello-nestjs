@@ -7,9 +7,13 @@ import {
   ConfigModule,
   ConfigService,
 } from '@nestjs/config';
+import { UsersModule } from '../users/users.module';
+import { SequelizeModule } from '@nestjs/sequelize';
+import { User } from '../users/entities/user.entity';
 
 @Module({
   imports: [
+    UsersModule,
     ConfigModule,
     PassportModule,
     JwtModule.registerAsync({
