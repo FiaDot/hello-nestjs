@@ -49,6 +49,12 @@ export class DateTimeHelper {
     return tm.format('YYYY-MM-DD HH:mm:ss');
   };
 
+  // 현재시간 + 인자전달 시간 반환
+  static get_now_add_hour = (add_hours): string => {
+    const tm = moment().add(add_hours, 'h');
+    return tm.format('YYYY-MM-DD HH:mm:ss');
+  };
+
   // 이전 날짜 반환
   static get_prev_day = (sub_days = 1): string => {
     return moment().subtract(sub_days, 'd').format('YYYY-MM-DD HH:mm:ss');
