@@ -19,22 +19,27 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   }
 
   canActivate(context: ExecutionContext): boolean {
+    // Authorization: Bearer token_value 사용할 때
     const request = context.switchToHttp().getRequest();
-    // const { authorization } = request.headers;
-    //
-    // if (authorization === undefined)
-    //   throw new UnauthorizedException('token 없음');
-    //
-    // const token = authorization.replace('Bearer ', '');
-    const { token } = request.headers;
-    if (token === undefined) throw new UnauthorizedException('token 없음');
+    const { authorization } = request.headers;
 
+    if (authorization === undefined)
+      throw new UnauthorizedException('token 없음');
+
+    const token = authorization.replace('Bearer ', '');
     request.user = this.validateToken(token);
+
+    // header.token 사용할 때
+    // const request = context.switchToHttp().getRequest();
+    // const { token } = request.headers;
+    // if (token === undefined) throw new UnauthorizedException('token 없음');
+    //
+    // request.user = this.validateToken(token);
     return true;
   }
 
   validateToken(token: string) {
-    const secret = this.configService.get('JWT_JWT_SECRET');
+    const secret = this.configService.get('JWT_SECRET');
 
     try {
       const verify = this.jwtService.verify(token, { secret });
