@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { DateTimeHelper } from '../common/helpers/datetime.helper';
-import { getModelToken} from '@nestjs/sequelize';
+import { getModelToken } from '@nestjs/sequelize';
 
 // 로그 상세 정보 끄기
 if (global.console.constructor.name === 'CustomConsole') {
@@ -22,7 +22,7 @@ const testUser = {
 
 describe('UsersService', () => {
   let service: UsersService;
-  let model: typeof User;
+  // let model: typeof User;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -47,7 +47,7 @@ describe('UsersService', () => {
     }).compile();
 
     service = module.get<UsersService>(UsersService);
-    model = module.get<typeof User>(getModelToken(User));
+    // model = module.get<typeof User>(getModelToken(User));
   });
 
   it('should be defined', () => {
