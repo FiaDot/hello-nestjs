@@ -6,6 +6,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { RankingModule } from './ranking/ranking.module';
+import { AssetModule } from './asset/asset.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -56,6 +57,7 @@ import * as Joi from 'joi';
     UsersModule,
     AuthModule,
     RankingModule,
+    AssetModule,
   ],
   controllers: [AppController],
   providers: [AppService],
