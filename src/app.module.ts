@@ -21,6 +21,8 @@ import * as Joi from 'joi';
         DB_DATABASE: Joi.string().required(),
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRATION_TIME: Joi.number().required(),
+        CACHE_HOST: Joi.string().required(),
+        CACHE_PORT: Joi.number().required(),
       }),
     }),
     SequelizeModule.forRootAsync({
