@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import ioredis, { Redis } from 'ioredis';
+import ioredis from 'ioredis';
 import { ConfigService } from '@nestjs/config';
+import * as Redis from 'ioredis';
 
 @Injectable()
 export class RankingService {
-  private redis: Redis;
+  private redis: Redis.Redis;
 
   constructor(private configService: ConfigService) {
     this.redis = new ioredis({
