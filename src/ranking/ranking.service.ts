@@ -1,14 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import ioredis from 'ioredis';
 import { ConfigService } from '@nestjs/config';
-import * as Redis from 'ioredis';
+import Redis from 'ioredis';
 
 @Injectable()
 export class RankingService {
-  private redis: Redis.Redis;
+  private redis: Redis;
 
   constructor(private configService: ConfigService) {
-    this.redis = new ioredis({
+    this.redis = new Redis({
       port: configService.get('CACHE_PORT'),
       host: configService.get('CACHE_HOST'),
       family: 4, // 4 (IPv4) or 6 (IPv6)
@@ -19,7 +18,7 @@ export class RankingService {
 
     // const cc = async () => {
     //   await this.put('key', 'test');
-    //   const v = await this.get('key);
+    //   const v = await this.get('key');
     //   console.log(v);
     // };
     // cc();
