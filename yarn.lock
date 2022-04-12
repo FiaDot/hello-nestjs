@@ -878,15 +878,7 @@
     "@types/connect" "*"
     "@types/node" "*"
 
-"@types/cache-manager-ioredis@^2.0.2":
-  "integrity" "sha512-mcn1k5bCJ/iAIymLRq4d6KSvEdrdspuo8KEIIPkPEl5WP+2CC7NWtRJmgFBoNqCgNxr++B62kOmIH1HYXAiBdA=="
-  "resolved" "https://registry.npmjs.org/@types/cache-manager-ioredis/-/cache-manager-ioredis-2.0.2.tgz"
-  "version" "2.0.2"
-  dependencies:
-    "@types/cache-manager" "*"
-    "@types/ioredis" "*"
-
-"@types/cache-manager@*", "@types/cache-manager@^3.4.3":
+"@types/cache-manager@^3.4.3":
   "integrity" "sha512-71aBXoFYXZW4TnDHHH8gExw2lS28BZaWeKefgsiJI7QYZeJfUEbMKw6CQtzGjlYQcGIWwB76hcCrkVA3YHSvsw=="
   "resolved" "https://registry.npmjs.org/@types/cache-manager/-/cache-manager-3.4.3.tgz"
   "version" "3.4.3"
@@ -961,13 +953,6 @@
   "integrity" "sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw=="
   "resolved" "https://registry.npmjs.org/@types/graceful-fs/-/graceful-fs-4.1.5.tgz"
   "version" "4.1.5"
-  dependencies:
-    "@types/node" "*"
-
-"@types/ioredis@*":
-  "integrity" "sha512-69LyhUgrXdgcNDv7ogs1qXZomnfOEnSmrmMFqKgt1XMJxmoOSG/u3wYy13yACIfKuMJ8IhKgHafDO3sx19zVQQ=="
-  "resolved" "https://registry.npmjs.org/@types/ioredis/-/ioredis-4.28.10.tgz"
-  "version" "4.28.10"
   dependencies:
     "@types/node" "*"
 
