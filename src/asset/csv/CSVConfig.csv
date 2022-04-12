@@ -1,0 +1,136 @@
+﻿debug,id,value
+인게임 카메라 스크롤 감도의 최소 수치,DRAG_SPEED_MIN,1
+인게임 카메라 스크롤 감도의 최대 수치,DRAG_SPEED_MAX,20
+인게임 카메라 스크롤 감도의 최소 수치를 UI에서 표현할 때,UI_SENSITIVITY_MIN,1
+인게임 카메라 스크롤 감도의 최대 수치를 UI에서 표현할 때,UI_SENSITIVITY_MAX,100
+UI에 표시되는 오브젝트와의 거리(m)를 계산할 때 곱하는 값,DISTANCE_RATE,0.3
+생성된 발자국이 값에 거리 후에 사라진다,DISTANCE_FOOT_MARK,3
+부위 구분 : 머리,TAG_HEAD_PART,TargetHead
+부위 구분 : 몸통,TAG_BODY_PART,TargetBody
+사격 사운드가 도달 하는 거리,SOUND_FIRE_RANGE_MAX,90
+수류탄 사운드가 도달 하는 거리,SOUND_GRENADE_RANGE_MAX,90
+재장전 사운드가 도달 하는 거리,SOUND_RELOAD_RANGE_MAX,45
+점프 사운드가 도달 하는 거리,SOUND_JUMP_RANGE_MAX,30
+발자국 사운드가 도달 하는 거리,SOUND_RUN_RANGE_MAX,24
+무기교체 사운드가 도달 하는 거리,SOUND_CHANGE_RANGE_MAX,0
+사망 사운드가 도달 하는 거리,SOUND_DEATH_RANGE_MAX,24
+보유할 수 있는 승리 액션 최대 개수,MAX_WIN_ACTION_COUNT,4
+에임 UI 최소 거리,PLAY_AIM_BASE_DISTANCE,2
+수류탄 던지는 힘,PLAY_THROW_POWER,3000
+수류탄 폭발 대기 시간(초),PLAY_THROW_EXPLOSION_TIME,3
+수류탄 폭발 시 카메라 흔들리는 시간(초),PLAY_THROW_EXPLOSION_SHAKE_TIME,1
+수류탄 각도 보정(기본 카메라 각도 +@) - X,PLAY_THROW_ADD_ANGLE_X,-9
+수류탄 각도 보정(기본 카메라 각도 +@) - Y,PLAY_THROW_ADD_ANGLE_Y,-2
+수류탄 각도 보정(기본 카메라 각도 +@) - Z,PLAY_THROW_ADD_ANGLE_Z,0
+수류탄 중력,PLAY_THROW_GRAVITY,-9.8
+인장 아이콘의 노출 위치 좌표 - X,EMBLEM_BASE_POS_X,0
+인장 아이콘의 노출 위치 좌표 - Y,EMBLEM_BASE_POS_Y,115
+인장 아이콘의 노출 위치 좌표 - Z,EMBLEM_BASE_POS_Z,0
+인장 아이콘의 노출 시간,EMBLEM_TIME,3
+최초 지급 캐릭터 ID : 마이키,DEFAULT_CHAR_ID,101003
+최초 지급 주무기-라이플 ID : K2(2102001),DEFAULT_WEAPON_MAIN_ID_1,2102001
+최초 지급 주무기-저격 ID : PSG-1(2103001),DEFAULT_WEAPON_MAIN_ID_2,0
+최초 지급 보조무기 ID : BERETTA M92(2204001),DEFAULT_WEAPON_SUB_ID_1,2204001
+최초 지급 보조무기 ID : M9(2206001),DEFAULT_WEAPON_SUB_ID_2,0
+최초 지급 투척무기 ID : M67(2308001),DEFAULT_WEAPON_THROW_ID,0
+최초 지급 코스튬 ID : 날개(603023008),DEFAULT_COSTUME_ID_1,0
+최초 지급 코스튬 ID : 벡 후드(602021008),DEFAULT_COSTUME_ID_2,0
+최초 지급 코스튬 ID : 쿨리 후드(602021009),DEFAULT_COSTUME_ID_3,0
+최초 지급 코스튬 ID : 화이트 망토(602021010),DEFAULT_COSTUME_ID_4,0
+최초 인장 ID : 훈련병(503001),DEFAULT_EMBLEM_ID,503001
+최초 지급 골드,DEFAULT_GOLD,0
+최초 지급 수정,DEFAULT_CASH,0
+스코프가 보여진후 사격할수 있는 딜레이,PLAY_ZOOM_WAIT_TIME,0.5
+스코프 줌 속도,PLAY_ZOOM_SPEED,0.3
+에임 모이는 속도(자동일때만),AIM_ZOOM_SPEED,0.4
+킬로 획득하는 캐릭터 숙련도 포인트,CHR_MASTERY_POINT_OF_KILL,2
+어시스트로 획득하는 캐릭터 숙련도 포인트,CHR_MASTERY_POINT_OF_ASSIST,1
+고유 스킬 사용후 숙련도를 획득 할 수 있는 시간(초),CHR_MASTERY_POINT_REFRESH,20
+헤드샷으로 획득하는 무기 숙련도 포인트,WP_MASTERY_POINT_OF_HEAD_HIT,1
+장전버튼 후 숙련도를 획득 할 수 있는 시간(초),WP_MASTERY_POINT_REFRESH,10
+캐릭터 랜덤 숙련도 최소 수치,CHR_MASTERY_POINT_RANDOM_MIN,2
+캐릭터 랜덤 숙련도 최대 수치,CHR_MASTERY_POINT_RANDOM_MAX,10
+무기 랜덤 숙련도 최소 수치,WP_MASTERY_POINT_RANDOM_MIN,2
+무기 랜덤 숙련도 최대 수치,WP_MASTERY_POINT_RANDOM_MAX,10
+계정 레벨 경험치 디폴트 획득수치,FFA_ACCOUNT_EXP_DEFAULT,120
+계정 레벨 경험치 (팀전 승리 보너스 수치),FFA_ACCOUNT_EXP_TB_WIN,20
+계정 레벨 경험치 (개인전 1등 보너스 수치),FFA_ACCOUNT_EXP_SB_WIN_1,20
+계정 레벨 경험치 (개인전 2등 보너스 수치),FFA_ACCOUNT_EXP_SB_WIN_2,15
+계정 레벨 경험치 (개인전 3등 보너스 수치),FFA_ACCOUNT_EXP_SB_WIN_3,10
+개인전 계급경험치 보상 : 1등 계급 경험치 보상,FFA_CLASS_REWARD_1ST,20
+개인전 계급경험치 보상 : 2등 계급 경험치 보상,FFA_CLASS_REWARD_2ND,15
+개인전 계급경험치 보상 : 3등 계급 경험치 보상,FFA_CLASS_REWARD_3RD,12
+개인전 계급경험치 보상 : 4등~꼴등 계급 경험치 보상,FFA_CLASS_REWARD_OTHER,10
+팀전 계급경험치 보상 : 승리팀,TB_CLASS_REWARD_WIN,15
+팀전 계급경험치 보상 : 패배팀,TB_CLASS_REWARD_LOSE,10
+KDA평점을 위한값 : 킬수에 곱하는 수치,KDA_POINT_KILL,1
+KDA평점을 위한값 : 데스에 곱하는 수치,KDA_POINT_DEATH,1
+KDA평점을 위한값 : 어시스트에 곱하는 수치,KDA_POINT_ASSIST,0.5
+골드보상용 : 기본으로 100골드는 준다.,BASE_REWARD_GOLD,100
+골드보상용 : 캐릭터평점에 이 키값을 곱하고오~ 기본골드를 더한게 총보상.,KDA_REWARD_GOLD,2
+팀전 승리시 캐릭터 경험치 카드,CHAR_EXP_CARD_TB_WIN,5011
+팀전 승리시 무기 경험치 카드,WEAPON_EXP_CARD_TB_WIN,5014
+팀전 패배시 캐릭터 경험치 카드,CHAR_EXP_CARD_TB_LOSE,5010
+팀전 패배시 무기 경험치 카드,WEAPON_EXP_CARD_TB_LOSE,5013
+개인전 1~3등 캐릭터 경험치 카드,CHAR_EXP_CARD_SB_1_3,5011
+개인전 4등 이하 캐릭터 경험치 카드,CHAR_EXP_CARD_SB_4_10,5010
+개인전 1~3등 무기 경험치 카드,WEAPON_EXP_CARD_SB_1_3,5014
+개인전 4등 이하 무기 경험치 카드,WEAPON_EXP_CARD_SB_4_10,5013
+MVP달성 캐릭터 경험치 카드,CHAR_EXP_CARD_MVP,5012
+MVP달성 캐릭터 경험치 카드 획득 확률,CHAR_EXP_CARD_MVP_PER,0.1
+MVP달성 무기 경험치 카드,WEAPON_EXP_CARD_MVP,5015
+MVP달성 무기 경험치 카드 획득 확률,WEAPON_EXP_CARD_MVP_PER,0.1
+부활 후 무적 유지 시간,INVINCIBILITY_TIME,3
+무적 시 깜빡이는 시간 주기,INVINCIBILITY_BLINK_TIME,0.1
+수류탄 폭발시 카메라 흔들림 적용 범위,GRENADE_SHAKE_RADIUS,50
+무기 딜레이 표시 가능 최소 시간(초),WEAPON_DELAY_SHOW_MIN_TIME,1
+결과창 자동 로비 이동 대기 시간,INGAME_RESULT_WAIT_TIME,20
+닉네임 글자수 최소,NAME_LEN_MIN,2
+닉네임 글자수 최대,NAME_LEN_MAX,12
+캐릭터 스텟 UI의 HP 최대 기준치,MAX_CHR_STAT_HP,200
+캐릭터 스텟 UI의 이동속도 최대 기준치,MAX_CHR_STAT_MOVE,30
+캐릭터 스텟 UI의 부활시간 최대 기준치,MAX_CHR_STAT_REV,11
+캐릭터 스텟 UI의 게이지량 최대 기준치,MAX_CHR_STAT_GAUGE,1300
+무기 스텟 UI의 데미지 최대 기준치,MAX_WEAPON_STAT_DMG,160
+무기 스텟 UI의 해드샷 최대 기준치,MAX_WEAPON_STAT_HEAD,200
+메일 최대 보관 개수,MAIL_LIMIT_COUNT,100
+메일 보관 기간(초),MAIL_LIMIT_TIME,604800
+메일 수령 시 동일템 보유인 경우 금액 산출 비율(50%),MAIL_REWORD_PER,50
+메일 수령 시 동일템 보유인 경우 금액 산출 최소값,MAIL_REWORD_MIN,1000
+전투맵 진입 시 로딩 시간,LOADING_TIME_FOR_BATTLE,2
+컷씬 대기시간,CUT_SCENE_PASS_TIME,5
+어시스트 획득 가능 시간(초),ASSIST_POSSIBILITY_TIME,5
+우편함 보유중인 아이템 획득 시 변경되는 재화 ID (골드),MAIL_CHANGE_CONSUME_ID,5002
+연습모드에서 캐릭터 숙련도 레벨 값,PRACTICE_CHARACTER_LEVEL,40
+연습모드에서 무기 숙련도 레벨 값,PRACTICE_WEAPON_LEVEL,40
+첫 구동 시 기본 모드 선택값 (전체 랜덤),DEFAULT_MODE_ID,703
+자이로센서 감도 최소 수치,GYRO_DRAG_SPEED_MIN,20
+자이로센서 감도 최대 수치,GYRO_DRAG_SPEED_MAX,200
+헤드 데미지 감소 최대 기준치,MAX_CHR_STAT_HEAD_DEC,20
+몸통 데미지 감소 최대 기준치,MAX_CHR_STAT_BODY_DEC,20
+무기 사거리 최대 기준치,MAX_WEAPON_STAT_DISTANCE,150
+무기 공격 속도 최대 기준치,MAX_WEAPON_STAT_ATTACK_SPEED,3
+이동 속도 최대 기준치,MAX_WEAPON_STAT_MOVE_SPEED,100
+반동 최대 기준치,MAX_WEAPON_STAT_BACK_ACTION,5
+탄창 최대 기준치,MAX_WEAPON_STAT_MAGAZINE,70
+탄창 교체 시간 최대 기준치,MAX_WEAPON_STAT_MAGAZINE_TIME,5
+탄 튐 확률 최대 기준치,MAX_WEAPON_STAT_AIM_KICK,100
+탄 튐 데미지 최대 기준치,MAX_WEAPON_STAT_AIM_KICK_DAMAGE,150
+캐릭터 처치시 배틀아이템 드랍 확률,BATTTLE_ITEM_GET_PER,0.5
+배틀아이템 드랍  그룹 ID,BATTTLE_ITEM_GROUP_ID,1001
+조이스틱 맥스 속도,MOVE_MAX_SPEED,1.5
+최종 충전단계,CHARGE_LIMIT,3
+1단계 충전시간(초),1st_CHARGE,1
+2단계 충전시간(초),2nd_CHARGE,3
+3단계 충전시간(초),3rd_CHARGE,5
+단계 삭제 시간,CHARGE_REFRESH,3
+풍선 HP 카운트,BALLOON_HP,5
+스킬 UI 시작 이펙트,SKILL_UI_EFFECT_START,effect_UI_skill_unique_start
+스킬 UI 종료 이펙트,SKILL_UI_EFFECT_END,effect_UI_skill_unique_end
+스킬 UI 유지 이펙트,SKILL_UI_EFFECT_WAIT,effect_UI_skill_unique_wait
+스킬 UI 범위 표시 이펙트,SKILL_UI_EFFECT_RANGE,effect_Skill_range_01
+맞았을때 카메라 이펙트,EFFECT_HIT_CAMERA,effect_Shot_screen_01
+자신 인디케이터,EFFECT_INDICATOR_ME,effect_indicator_me
+적 인디케이터,EFFECT_INDICATOR_ENEMY,effect_indicator_enemy
+레드팀 인디케이터,EFFECT_INDICATOR_RED,effect_indicator_pink
+블루팀 인디케이터,EFFECT_INDICATOR_BLUE,effect_indicator_mint
