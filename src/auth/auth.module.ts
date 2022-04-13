@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UsersModule } from '../users/users.module';
 import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
@@ -21,6 +22,14 @@ import { JwtStrategy } from './jwt.strategy';
         signOptions: {
           expiresIn: `${configService.get('JWT_EXPIRATION_TIME')}s`,
         },
+      }),
+    }),
+    HttpModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        timeout: configService.get('HTTP_TIMEOUT'),
+        maxRedirects: configService.get('HTTP_MAX_REDIRECTS'),
       }),
     }),
   ],
