@@ -3,6 +3,7 @@ import {
   HealthCheck,
   HealthCheckService,
   HttpHealthIndicator,
+  SequelizeHealthIndicator,
 } from '@nestjs/terminus';
 import { ApiOperation } from '@nestjs/swagger';
 
@@ -11,6 +12,7 @@ export class HealthCheckController {
   constructor(
     private health: HealthCheckService,
     private http: HttpHealthIndicator,
+    private db: SequelizeHealthIndicator,
   ) {}
 
   @ApiOperation({
@@ -22,6 +24,7 @@ export class HealthCheckController {
   check() {
     return this.health.check([
       () => this.http.pingCheck('nestjs-docs', 'https://docs.nestjs.com'),
+      () => this.db.pingCheck('db'),
     ]);
   }
 }
