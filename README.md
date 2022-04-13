@@ -71,3 +71,25 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+
+## .env format
+
+### DB 설정
+DB_HOST=localhost
+DB_PORT=13306
+DB_USERNAME=everse
+DB_PASSWORD=asdf1234!
+DB_DATABASE=everse
+
+### JWT 
+JWT_SECRET=everse!@#$
+JWT_EXPIRATION_TIME=6000
+
+### Redis
+CACHE_HOST=localhost
+CACHE_PORT=16379
+
+### HTTP
+HTTP_TIMEOUT=5000
+HTTP_MAX_REDIRECTS=5
