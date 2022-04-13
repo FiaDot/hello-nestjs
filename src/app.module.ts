@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { RankingModule } from './ranking/ranking.module';
 import { AssetModule } from './asset/asset.module';
+import { HealthCheckController } from './health-check/health-check.controller';
 import * as Joi from 'joi';
 
 @Module({
@@ -59,7 +60,7 @@ import * as Joi from 'joi';
     RankingModule,
     AssetModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, HealthCheckController],
   providers: [AppService],
 })
 export class AppModule {}
