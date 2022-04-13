@@ -7,7 +7,7 @@ export class LoginDto {
   @MaxLength(128)
   @ApiProperty({
     description: '플랫폼 제공 User ID',
-    example: 'em123', // default: "string" 해당 타입이 들어감
+    example: '1', // default: "string" 해당 타입이 들어감
     required: true, // default: false
   })
   platformUID: string;

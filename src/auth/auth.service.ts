@@ -20,13 +20,13 @@ export class AuthService {
   async validUser(platformUID: string, platformToken: string): Promise<User> {
     const user = await this.usersService.findOneByPlatformUID(platformUID);
     // TODO : token 체크
-    const result: Observable<AxiosResponse<any>> = await this.httpService
-      .get('http://localhost:3000/api-docs')
-      .pipe(map((response) => response.data));
-
-    result.subscribe((res) => {
-      console.log(res);
-    });
+    // const result: Observable<AxiosResponse<any>> = await this.httpService
+    //   .get('http://localhost:3000/api-docs')
+    //   .pipe(map((response) => response.data));
+    //
+    // result.subscribe((res) => {
+    //   console.log(res);
+    // });
     return user;
   }
 
