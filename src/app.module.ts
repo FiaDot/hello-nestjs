@@ -9,6 +9,8 @@ import { RankingModule } from './ranking/ranking.module';
 import { AssetModule } from './asset/asset.module';
 import { HealthCheckController } from './health-check/health-check.controller';
 import * as Joi from 'joi';
+import { TerminusModule } from '@nestjs/terminus';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
@@ -55,6 +57,8 @@ import * as Joi from 'joi';
         // models: [User], // 수동으로 추가했을 때 테이블 생성 안됨
       }),
     }),
+    TerminusModule, // health checker
+    HttpModule, // axios
     UsersModule,
     AuthModule,
     RankingModule,
