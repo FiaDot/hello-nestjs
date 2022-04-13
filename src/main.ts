@@ -5,6 +5,7 @@ import { utilities, WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 import { Logger } from '@nestjs/common';
 import { ValidationPipe } from '@nestjs/common';
+import * as basicAuth from 'express-basic-auth';
 
 async function bootstrap() {
   process.env.TZ = 'Asia/Seoul'; // UTC +09:00
@@ -54,8 +55,19 @@ async function bootstrap() {
     }),
   );
 
+  // Swagger 인증 적용
+  app.use(
+    ['/api-docs', '/docs', '/docs-json'],
+    basicAuth({
+      challenge: true,
+      users: {
+        user: 'asdf1234!@#',
+      },
+    }),
+  );
   // Swagger 설정
   setupSwagger(app);
+
   await app.listen(3000);
   logger.log('App listening at 3000');
 }
