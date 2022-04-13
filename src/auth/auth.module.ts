@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UsersModule } from '../users/users.module';
 import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
@@ -22,6 +23,10 @@ import { JwtStrategy } from './jwt.strategy';
           expiresIn: `${configService.get('JWT_EXPIRATION_TIME')}s`,
         },
       }),
+    }),
+    HttpModule.register({
+      timeout: 5000,
+      maxRedirects: 5,
     }),
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],

@@ -4,6 +4,9 @@ import { DateTimeHelper } from '../common/helpers/datetime.helper';
 import { ConfigService } from '@nestjs/config';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/entities/user.entity';
+import { HttpService } from '@nestjs/axios';
+import { map, Observable } from 'rxjs';
+import { AxiosResponse } from 'axios';
 
 @Injectable()
 export class AuthService {
@@ -11,11 +14,19 @@ export class AuthService {
     private jwtService: JwtService,
     private configService: ConfigService,
     private usersService: UsersService,
+    private httpService: HttpService,
   ) {}
 
   async validUser(platformUID: string, platformToken: string): Promise<User> {
     const user = await this.usersService.findOneByPlatformUID(platformUID);
     // TODO : token 체크
+    const result: Observable<AxiosResponse<any>> = await this.httpService
+      .get('http://localhost:3000/api-docs')
+      .pipe(map((response) => response.data));
+
+    result.subscribe((res) => {
+      console.log(res);
+    });
     return user;
   }
 
