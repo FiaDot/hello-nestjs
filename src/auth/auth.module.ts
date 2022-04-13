@@ -24,9 +24,13 @@ import { HttpModule } from '@nestjs/axios';
         },
       }),
     }),
-    HttpModule.register({
-      timeout: 5000,
-      maxRedirects: 5,
+    HttpModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        timeout: configService.get('HTTP_TIMEOUT'),
+        maxRedirects: configService.get('HTTP_MAX_REDIRECTS'),
+      }),
     }),
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
