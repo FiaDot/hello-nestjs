@@ -4,17 +4,16 @@ import { DateTimeHelper } from '../common/helpers/datetime.helper';
 import { ConfigService } from '@nestjs/config';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/entities/user.entity';
-import { HttpService } from '@nestjs/axios';
-import { map, Observable } from 'rxjs';
-import { AxiosResponse } from 'axios';
+// import { HttpService } from '@nestjs/axios';
+// import { map, Observable } from 'rxjs';
+// import { AxiosResponse } from 'axios';
 
 @Injectable()
 export class AuthService {
   constructor(
     private jwtService: JwtService,
     private configService: ConfigService,
-    private usersService: UsersService,
-    private httpService: HttpService,
+    private usersService: UsersService, // private httpService: HttpService,
   ) {}
 
   async validUser(platformUID: string, platformToken: string): Promise<User> {

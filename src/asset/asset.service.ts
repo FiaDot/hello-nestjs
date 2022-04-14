@@ -6,10 +6,9 @@ import { CsvConfig } from './entities/csv-config.entity';
 @Injectable()
 export class AssetService {
   constructor(private readonly csvParser: CsvParser) {
-    const loader = async () => {
+    (async () => {
       await this.parse();
-    };
-    loader();
+    })();
   }
 
   async parse() {
