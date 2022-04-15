@@ -5,12 +5,10 @@ import { AuthService } from './auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 
-
 const encoded = {
   id: 1,
   platformUID: '123',
 };
-
 
 describe('AuthController', () => {
   let controller: AuthController;

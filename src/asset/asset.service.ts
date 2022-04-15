@@ -21,7 +21,7 @@ export class AssetService {
       stream,
       CsvConfig,
     );
-     
+
     // console.log(csvConfigs);
     return csvConfigs;
   }

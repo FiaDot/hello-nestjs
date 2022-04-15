@@ -25,7 +25,8 @@ describe('RankingController', () => {
               }
             }),
           },
-        },],
+        },
+      ],
     }).compile();
 
     controller = module.get<RankingController>(RankingController);
