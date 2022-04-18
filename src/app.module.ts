@@ -12,6 +12,9 @@ import * as Joi from 'joi';
 import { TerminusModule } from '@nestjs/terminus';
 import { HttpModule } from '@nestjs/axios';
 import { BatchModule } from './batch/batch.module';
+import slackConfig from './config/slack.config';
+import { SlackModule } from 'nestjs-slack-webhook';
+import { NotifyModule } from './notify/notify.module';
 
 @Module({
   imports: [
@@ -29,6 +32,12 @@ import { BatchModule } from './batch/batch.module';
         CACHE_HOST: Joi.string().required(),
         CACHE_PORT: Joi.number().required(),
       }),
+      load: [slackConfig],
+    }),
+    SlackModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config) => config.get('slack'),
     }),
     SequelizeModule.forRootAsync({
       inject: [ConfigService],
@@ -65,6 +74,7 @@ import { BatchModule } from './batch/batch.module';
     RankingModule,
     AssetModule,
     BatchModule,
+    NotifyModule,
   ],
   controllers: [AppController, HealthCheckController],
   providers: [AppService],
