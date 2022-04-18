@@ -11,6 +11,7 @@ import { HealthCheckController } from './health-check/health-check.controller';
 import * as Joi from 'joi';
 import { TerminusModule } from '@nestjs/terminus';
 import { HttpModule } from '@nestjs/axios';
+import { BatchModule } from './batch/batch.module';
 
 @Module({
   imports: [
@@ -63,6 +64,7 @@ import { HttpModule } from '@nestjs/axios';
     AuthModule,
     RankingModule,
     AssetModule,
+    BatchModule,
   ],
   controllers: [AppController, HealthCheckController],
   providers: [AppService],
