@@ -12,7 +12,6 @@ import * as Joi from 'joi';
 import { TerminusModule } from '@nestjs/terminus';
 import { HttpModule } from '@nestjs/axios';
 import { BatchModule } from './batch/batch.module';
-import { TaskService } from './task/task.service';
 
 @Module({
   imports: [
@@ -68,6 +67,6 @@ import { TaskService } from './task/task.service';
     BatchModule,
   ],
   controllers: [AppController, HealthCheckController],
-  providers: [AppService, TaskService],
+  providers: [AppService],
 })
 export class AppModule {}
