@@ -93,3 +93,6 @@ CACHE_PORT=16379
 ### HTTP
 HTTP_TIMEOUT=5000
 HTTP_MAX_REDIRECTS=5
+
+### Slack 알림용 incoming webhook URL 
+SLACK_WEBHOOK_URL=https://hooks.slack.com/services/XXXXX/YYYY
